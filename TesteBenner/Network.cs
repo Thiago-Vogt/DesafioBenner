@@ -26,8 +26,8 @@ namespace TesteBenner
 
         public void connect(int a , int b)
         {
-            validarNumero(a);
-            validarNumero(b);
+            validarElemento(a);
+            validarElemento(b);
 
             if(a == b)
             {
@@ -40,12 +40,12 @@ namespace TesteBenner
 
         public void disconnect(int a, int b)
         {
-            validarNumero(a);
-            validarNumero(b);
+            validarElemento(a);
+            validarElemento(b);
 
             if (a == b)
             {
-                throw new ArgumentException("Um número não pode se desconectar com ele mesmo");
+                throw new ArgumentException("Um número não pode se desconectar dele mesmo");
             }
 
             if(!conexoes[a].Contains(b))
@@ -60,16 +60,16 @@ namespace TesteBenner
 
         public Boolean query(int a, int b)
         {
-            validarNumero(a);
-            validarNumero(b);
+            validarElemento(a);
+            validarElemento(b);
 
             return levelConnection(a, b) > 0;
         }
 
         public int levelConnection(int a, int b)
         {
-            validarNumero(a);
-            validarNumero(b);
+            validarElemento(a);
+            validarElemento(b);
 
             if (conexoes[a].Contains(b)) return 1; //conexão direta
 
@@ -80,9 +80,9 @@ namespace TesteBenner
 
             while (fila.Count > 0)
             {
-                var (current, level) = fila.Dequeue();
+                var (atual, level) = fila.Dequeue();
 
-                foreach (var vizinho in conexoes[current])
+                foreach (var vizinho in conexoes[atual])
                 {
                     if (vizinho == b) return level;
 
@@ -96,11 +96,11 @@ namespace TesteBenner
             return 0; // Não há conexão entre os elementos
         }
 
-        //valida se número está dentro tamnho setado
-        public void validarNumero(int num)
+        //valida se elemento está dentro tamanho setado
+        public void validarElemento(int num)
         {
             if (num < 0 || num > tamanho) {
-                throw new ArgumentOutOfRangeException("Numero fora do alcance");
+                throw new ArgumentOutOfRangeException("Elemento fora do alcance");
             }
         }
     }
